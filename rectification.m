@@ -124,9 +124,13 @@ p82 = [286,396, 1]';
     plot([p52(1),p62(1)],[p52(2),p62(2)],'Color','g','LineWidth',2)
     plot([p72(1),p82(1)],[p72(2),p82(2)],'Color','g','LineWidth',2)
 
+% line L1
 pl1 = cross(p12,p22);
+% Line M1
 pm1 = cross(p32,p42);
+% Line L2
 pl2 = cross(p52,p62);
+% Line m2
 pm2 = cross(p72,p82);
 
 l11 = pl1(1);
@@ -146,14 +150,12 @@ orthT = [orth1; orth2];
 s = null(orthT);
 s11 = s(1);
 s12 = s(2);
-s22 = s(3);
+s22 = s(3); 
 
-S = [s11, s12; s12, 1];
+S = [s11, s12; s12, s22];
 
-[U, D, V] = svd(S);
-A = U'*sqrt(D)*U;
 K = chol(S, 'lower');
-%A=K;
+A=K;
 H2 = [A, [0;0]; [0,0,1]];
 
 int_boundaries = [1, new_boundaries(1); 1, new_boundaries(2); 1, 1];
